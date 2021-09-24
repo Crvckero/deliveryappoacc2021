@@ -1,0 +1,7 @@
+{
+    "service": "Gmail",
+    "auth": {
+        "user": "rover.curiosity.app@gmail.com",
+        "pass": "TU_CLAVE_DE_GMAIL_USA_UNA_CALVE_FUERTE"
+    }
+}

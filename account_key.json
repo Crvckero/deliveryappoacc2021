@@ -1,0 +1,12 @@
+{
+    "type": "service_account",
+    "project_id": "curiosity-server-b99ff",
+    "private_key_id": "98059bbe150f30bdfbd24b5eb7a6f7e2336463b7",
+    "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvAIBADANBgkqhkiG9w0BAQEFAASCBKYwggSiAgEAAoIBAQCDRH+4+3fRFw9y\n5+rtM2gYX5utgUfr8VolI3QMiMqe61gO5nysuMTFHsNQ5B+qw2ojR+b37buvE1wv\nXf+jwXY4gV2RbTnrqBxsbrADrDiofgrwuDNcbOOAZdO++RzuuiSL7f1s9ue72nnV\na/8obr1COZ187uhj2ahVu2BNWZa0moaPfnTD2JipqvrAxTP3g4xMQ9uC/K1YUMAU\n6Y2bN1bnLqTanu0PuT/2Zn+1hC/eaKH9XMFtP1ntttE2iGuXXiYj4AQzEbvCoJe4\nIzeaOcgYd4wZElqtaDi3NmKCMMlV78h2GNeoYfcC9DR/fhZPloLAZpAg9zfN6Wte\nsqTgj1lBAgMBAAECggEABByPZpcj0d4HyxjWDC91xXurJ+RagRqqcOrbHfBj7lXf\nSHoyMgPIkAcOZZh7oHDmAGxmYOImpI117/rhALtUzWDJ8j3qWEYH++J8q2TH0ok+\nJPuUCkNT3efymbL6U8TrU6G09CaIrCLj+YocMCNF1M7yrqDaERSWd/b6RXn2pTn9\nXHziPnekfJvS1i2rx9N0eVJ3o50Y99LXskR/cc/dvI6wIeCFGVzGGTQz0mNm/poT\naOr9zlZDjfadD5XzON4XXPJ+LqWrkihpRQasAqOGyP/JDsr6cY7/jen91gWNuR/O\nJOkjpTvuxRMti9auHK7jyQbTMw/Kvmj0/qlyM+fp0QKBgQC5Nn8bSR+Yco8kLsJl\nuVIkYAJC3sAeKnO0cxz5J+5Mqo0lvz7jb5P2zyqXPwHR1pidhKUiTyI1XjWR05zr\n8QuMXsV7S5TUXOHo6zULSOi3tNrwIBooYUJpP2S54ZtxbJNovtcMfwn2c5opp68C\nbJxGzuhD/CGJLOkiSnEk8FEk+QKBgQC1b+nmy5SfSJ+CJBPVcgMZ0cM07NnfKOYN\npRRrAfpfZIQ6ahRvR430QlotqoRQn6OedXyy79ZiC7oc2Q0B5tJGlUOMaOzF/xQ2\nVnZiR1XQAQTkO4+A5E1UY7QiKAB4eFaSkibBay5pIQU5U65I79qHxyPqkmTn0JWb\nd4hyJSsQiQKBgHy02+qkVrjP0d+b+FqD6HIDjyI1V4g4L0X+CDEfGM3YPEeBOLfs\npeUV4miKDRCb/JB7ArFSNQdYEpvIry0SVSNDoJZ+8ov2qkmpLUMW6VLgXFY4V0R/\nEDdLbufVp1M8txhc/vE0DKI7fj6z4Buyw5rNsAgumOoDKkpjc0Fa6lgJAoGAb8V6\nzXA6pYmCohSBl2s+F8jOPatvaHd0iZFZq7YzPFLa1nWFEyx8ea3qidlS26wMitCL\nulvfsNTSmXTo+3PrtAm97CCzRCIonHTVRyP07EfEcKl0dQ2vyb4GOUh1ScGwa2jX\nsS3LEH6EDlXLtyjzcdOu/5Gh0eEAWR7hEphtGCkCgYAjuRCJraR+EmLn1o8JFqfQ\nGLC2FCiu187ZGPDjOj1kQ4bQWSuRBzeBUzd7yDuxYUs2yHINTsD9LOPOjm7UNdO0\neQFdnEpiezJqnZHVD05XtcYW3U2IRp1y7TJ1U5GgPdi9qsfSL3zytJf4QtquX7oT\nvMDZ7hcJ/0mdiSUV6AkVrA==\n-----END PRIVATE KEY-----\n",
+    "client_email": "firebase-adminsdk-96kbv@curiosity-server-b99ff.iam.gserviceaccount.com",
+    "client_id": "106183170387332533156",
+    "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+    "token_uri": "https://oauth2.googleapis.com/token",
+    "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+    "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/firebase-adminsdk-96kbv%40curiosity-server-b99ff.iam.gserviceaccount.com"
+  }
