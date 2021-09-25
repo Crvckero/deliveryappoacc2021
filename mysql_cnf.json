@@ -1,7 +1,7 @@
 {
     "host": "10.124.0.2",
     "user": "node1",
-    "password": "zyDALeQu%4iY0xS^S*JPN20N!",
+    "password": "cOntras3na",
     "connectionLimit": 10,
     "multipleStatements": false,
     "charset": "utf8mb4"
