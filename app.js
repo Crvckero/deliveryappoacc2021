@@ -4,7 +4,7 @@ const accountTransport = require("./account_transport.json");
 const mail_rover = nodemailer.createTransport(accountTransport);
 
 const authorization1
-    = 'AAAAsRXbn3M:APA91bG_BodBBFPKGQYQZdlFQzDr0iKX_MLBxh-ycxk6hwhKjogEDYYAcvuosoDuZIyXK3nvbSY7bPUOqsWc6v1nmu6Np2yJC8YzYv9iUpbE-5p4dfidkrtTCauc-xGYEUVJHDAr5gYW';
+    = 'key=AAAAsRXbn3M:APA91bG_BodBBFPKGQYQZdlFQzDr0iKX_MLBxh-ycxk6hwhKjogEDYYAcvuosoDuZIyXK3nvbSY7bPUOqsWc6v1nmu6Np2yJC8YzYv9iUpbE-5p4dfidkrtTCauc-xGYEUVJHDAr5gYW';
 
 module.exports = {
     auth, dir, send, restringirApp, code_PMZ, key_PMZ, nombre, isExplorer
