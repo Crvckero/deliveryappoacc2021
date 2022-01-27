@@ -2,8 +2,8 @@ global._STORE_ = 'deliveryappoacc';
 global._APN = 'deliveryappoac-services.appspot.com';
 global._SEMILLA = '87364583b873264b8723648597634';
 
-global._KEY_MAPA_GOOGLE = 'AIzaSyBVJKjuIwc-YQO2_AfefJlSG-wj4FSKlZY';
-global._KEY_MAPA_HERE = 'O7k4Hi8BaFskdX3yiDflLsqw89UihPVDREcGbBAPA5A';
+global._KEY_MAPA_GOOGLE = 'AIzaSyDWQVyenfkO8GMEddMYJQkktOs20trDqOQ';
+global._KEY_MAPA_HERE = 'AIRZUlBWKKcW4m6sSM9fvuvV46858oY4vqy34Eu0G8s';
 
 global._ID_APP_1 = 1000001;
 global._ID_EXPLORER_APP_1 = 100050;
