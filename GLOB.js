@@ -35,4 +35,6 @@ global._TIPO_CLIENTE = 0;
 global._TIPO_ASESOR = 1;
 global._TIPO_CONDUCTOR = 2;
 
-global._MENSJAE_BLOQUEADO = `Usuario bloqueado, si crees que es un error comunicate a info@planck.biz`;
+global._TIPO_ENCOMIENDA = 4;
+global._TIME_ZONE = 'America/Mazatlan';
+global._MENSJAE_BLOQUEADO = `Usuario bloqueado, si crees que es un error comunicate a info@planck.biz`; 

@@ -78,12 +78,14 @@ function obtener(req, res, idplataforma, imei) {
         if (!autorizado)
             return;
         var ipInfo = req.ipInfo;
-        var timezone;
-        try {
-            timezone = ipInfo['timezone'];
-        } catch (err) {
-            timezone = 'UTC';
-        }
+            var timezone;
+            try {
+                timezone = ipInfo['timezone'];
+            } catch (err) {
+                timezone = _TIME_ZONE;
+            }
+            if (!timezone)
+                timezone = _TIME_ZONE;
         data.consultarRes(STORE_OBTENER, [timezone, timezone, idDespacho], function (chats) {
             return res.status(200).send({ estado: 1, chats: chats });
         }, res);

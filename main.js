@@ -41,7 +41,7 @@ http.listen(PORT, function () {
 });
 
 app.use(express.static(__dirname + '/publica'));
-
+app.use(express.static(__dirname + '/web'));
 
 app.use('/registro', require('./client/r_registro'));
 app.use('/agencia', require('./client/r_agencia'));

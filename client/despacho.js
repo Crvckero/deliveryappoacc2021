@@ -82,7 +82,7 @@ function iniciar(req, imei, idaplicativo, idCompra, idCliente, idDespachoEstado,
 
 const STORE_REGISTRAR_DESPACHO =
     "INSERT INTO " + _STORE_ + ".despacho (tipo, id_aplicativo, id_compra, id_cliente, id_despacho_estado, costo, costo_entrega, ltA, lgA, ltB, lgB, despacho, ruta, anio, mes, fecha, meta) "
-    + " VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, YEAR(NOW()), MONTH(NOW()), CONVERT_TZ(NOW(),'UTC',?), ?);";
+    + " VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, YEAR(NOW()), MONTH(NOW()), IFNULL(CONVERT_TZ(NOW(),'UTC',?), NOW()) , ?);";
 
 getKilometros = function (lat1, lon1, lat2, lon2) {
     rad = function (x) { return x * Math.PI / 180; }

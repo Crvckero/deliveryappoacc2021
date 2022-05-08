@@ -497,12 +497,14 @@ function sessiones(req, res, marca, modelo, so, vs, idplataforma, imei) {
         if (!autorizado)
             return;
         var ipInfo = req.ipInfo;
-        var timezone;
-        try {
-            timezone = ipInfo['timezone'];
-        } catch (err) {
-            timezone = 'UTC';
-        }
+            var timezone;
+            try {
+                timezone = ipInfo['timezone'];
+            } catch (err) {
+                timezone = _TIME_ZONE;
+            }
+            if (!timezone)
+                timezone = _TIME_ZONE;
         data.consultarRes(STORE_SESSIONES, [imei, timezone, timezone, idCliente], function (sessiones) {
             return res.status(200).send({ estado: 1, sessiones: sessiones });
         }, res);

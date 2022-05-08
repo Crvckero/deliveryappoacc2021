@@ -2,7 +2,7 @@
     "name": "curiosity",
     "description": "Un Producto de Planck",
     "license": "ISC",
-    "version": "0.1.0",
+    "version": "0.3.0",
     "author": "Juan Pablo Guaman Rodriguez",
     "contributors": [],
     "dependencies": {

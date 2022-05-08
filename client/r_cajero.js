@@ -25,7 +25,18 @@ var STORE_VER_COSTO =
     + " INNER JOIN " + _STORE_ + ".sucursal s ON cjs.id_sucursal = s.id_sucursal AND s.activo = 1 "
     + " INNER JOIN " + _STORE_ + ".agencia a ON a.id_agencia = s.id_agencia "
     + " INNER JOIN " + _STORE_ + ".agencia_aplicativo ap ON a.id_agencia = ap.id_agencia AND ap.id_aplicativo = ? ";
-    
+
+var STORE_VER_COSTO_ECONCOMIENTA =
+    "SELECT 0 AS isTarjeta, 0 AS pT, ANY_VALUE(s.id_agencia) AS id_agencia, "
+    + " ? AS dt, "
+    + " MIN( ROUND(costo_arranque + (costo_km_recorrido * ? ), 1)) AS costo_envio, "
+    + " ANY_VALUE(s.id_sucursal) AS id_sucursal, ? AS referencia, "
+    + " ANY_VALUE(cjs.id_cajero) AS id_cajero, ? AS id_cliente, ANY_VALUE(cj.nombres) AS nombres, "
+    + " ANY_VALUE(cj.img) AS img, ANY_VALUE(s.sucursal) AS sucursal "
+    + " FROM " + _STORE_ + ".cliente cj "
+    + " INNER JOIN " + _STORE_ + ".sucursal_cajero cjs ON cj.id_cliente = cjs.id_cajero AND cjs.activo = 1 "
+    + " INNER JOIN " + _STORE_ + ".sucursal s ON cjs.id_sucursal = s.id_sucursal AND s.activo = 1 ";
+
 function verCostoPromocion(req, res, idplataforma, imei) {
     var idCliente = req.body.idCliente;
     var lt = req.body.lt;
@@ -35,6 +46,20 @@ function verCostoPromocion(req, res, idplataforma, imei) {
     var agencias = req.body.agencias; //Formato 1,2,3
     agencias = agencias.toString().split(' ').join('');
 
+    var SQL_ = STORE_VER_COSTO;
+    var ARGS = [lt, lg, lt, lg, lt, lg, referencia, idCliente, idaplicativo];
+
+    var tipo = req.body.tipo;
+    if (tipo == _TIPO_ENCOMIENDA) {
+        var ltE = req.body.ltE;
+        var lgE = req.body.lgE;
+        var dis = getKilometros(lt, lg, ltE, lgE);
+        SQL_ = STORE_VER_COSTO_ECONCOMIENTA;
+        if (!referencia || referencia == 'null' || referencia == null)
+            referencia = 'Ubicación en MAPA';
+        ARGS = [dis, dis, referencia, idCliente];
+    }
+
     data.consultarRes(SQL_VER_SALDO, [idCliente], function (saldos) {
         var saldo = 0.0
         var cash = 0.0;
@@ -42,7 +67,7 @@ function verCostoPromocion(req, res, idplataforma, imei) {
             saldo = saldos[0]['saldo'];
             cash = saldos[0]['cash'];
         }
-        data.consultarRes(` ${SQL_START_} ${STORE_VER_COSTO} WHERE s.id_agencia IN (${agencias}) AND (s.id_sucursal IN ( ${STORE_SURSALES_HORARIO} ) ) GROUP BY s.id_sucursal ORDER BY dt LIMIT 10 ${SQL_END_} `, [lt, lg, lt, lg, lt, lg, referencia, idCliente, idaplicativo], function (cajeros) {
+        data.consultarRes(` ${SQL_START_} ${SQL_} WHERE s.id_agencia IN (${agencias}) AND (s.id_sucursal IN ( ${STORE_SURSALES_HORARIO} ) ) GROUP BY s.id_sucursal ORDER BY dt LIMIT 10 ${SQL_END_} `, ARGS, function (cajeros) {
             if (cajeros.length > 0)
                 return res.status(200).send({ estado: 1, cajero: cajeros[0], cajeros: cajeros, saldo: saldo, cash: cash });
             return res.status(200).send({ estado: -1, error: 'Error', saldo: saldo, cash: cash });

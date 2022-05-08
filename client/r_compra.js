@@ -120,7 +120,7 @@ router.post('/inciar/', function (req, res) {
 
 const STORE_INICIAR_COMPRA =
     "INSERT INTO " + _STORE_ + ".compra (id_despacho, id_aplicativo, id_sucursal, id_cliente, id_cajero, id_compra_estado, id_direccion, referencia, lt, lg, costo_entrega, id_hashtag, hashtag, descontado, meta, anio, mes, fecha) "
-    + " VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, YEAR(NOW()), MONTH(CONVERT_TZ(NOW(),'UTC',?)), CONVERT_TZ(NOW(),'UTC',?)) ;";
+    + " VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, YEAR(NOW()), MONTH(IFNULL(CONVERT_TZ(NOW(),'UTC',?), NOW()) ), IFNULL(CONVERT_TZ(NOW(),'UTC',?), NOW()) ) ;";
 
 var STORE_REGISTRAR_PROMOCION =
     "INSERT IGNORE INTO " + _STORE_ + ".`compra_promocion` (`id_compra`, `id_promocion`, `incentivo`, `producto`, `descripcion`, `precio`, `cantidad`, `total`, `imagen`) VALUES ";
@@ -135,6 +135,10 @@ function iniciar(req, res, idaplicativo, idplataforma, imei) {
     var auth = req.body.auth;
     var idDireccion = req.body.idDireccion;
     var referencia = req.body.referencia;
+    if (!referencia || referencia == "null" || referencia == null) {
+        referencia = 'Ubicación en mapa';
+        req.body.referencia = 'Ubicación en mapa';
+    }
     var lt = req.body.lt;
     var lg = req.body.lg;
     var costoEntrega = req.body.costoEntrega;
@@ -173,8 +177,10 @@ function iniciar(req, res, idaplicativo, idplataforma, imei) {
         try {
             timezone = ipInfo['timezone'];
         } catch (err) {
-            timezone = 'UTC';
+            timezone = _TIME_ZONE;
         }
+        if (!timezone)
+            timezone = _TIME_ZONE;
         var meta = { 'headers': req.headers, 'ipInfo': req.ipInfo };
         verificarHorario(idSucursal, function (respuesta) {
 
@@ -244,7 +250,7 @@ const STORE_REGISTRAR_VENTAS =
 
 function realizar(req, res, idplataforma, imei) {
     var idCliente = req.body.idCliente;
-
+    var tipo = req.body.tipo;
     var idCajero = req.body.idCajero;
     var idCompra = req.body.idCompra;
     var detalle = req.body.detalle;
@@ -364,6 +370,11 @@ function realizar(req, res, idplataforma, imei) {
                             let meta = { headers: req.headers, ipInfo: req.ipInfo };
                             let despacho = { a: cajero['sucursal'], b: cajero['nombres'], d: cajero['detalle'], r: cajero['referencia'], c: cajero['costo'], ce: cajero['costo_envio'] };
                             let ltB = cajero['ltB'], lgB = cajero['lgB'], ltA = cajero['lt'], lgA = cajero['lg'];
+
+                            if (tipo == _TIPO_ENCOMIENDA) {
+                                ltA = req.body.ltE;
+                                lgA = req.body.lgE;
+                            }
 
                             _despacho.iniciar(req, imei, idaplicativo, idCompra, idCliente, idDespachoEstado, cajero['costo'], cajero['costo_envio'], ltA, lgA, ltB, lgB, despacho, ruta, timezone, meta, function (respuesta) {
                                 cajero['id_despacho'] = respuesta['idDespacho'];

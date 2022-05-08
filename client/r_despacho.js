@@ -362,10 +362,14 @@ function confirmarRecogida(req, res, idplataforma, imei) {
         let idDespachoEstado = _DESPACHO_RECOGIDO;
         data.consultarRes(STORE_RECOGIDA_PAGO_DESPACHO, [idDespachoEstado, idDespacho], function () {
             data.consultarRes(STORE_LISTAR_ID_DESPACHO_CLIENTE, [idDespacho], function (despachos) {
+                let despacho = despachos[0];
                 let mensaje = '🛍 Compra en camino';
                 let valor = '';
-                chatDespacho.enviarChat(req, imei, idDespacho, idClienteRecibe, idClienteEnvia, _CHAT_ENVIA_CAJERO, _CHAT_TIPO_LINE, '🛍 Compra en camino', mensaje, valor, idDespachoEstado, function () {
-                    return res.status(200).send({ estado: 1, despacho: despachos[0] });
+                if (despacho['tipo'] == _TIPO_ENCOMIENDA) {
+                    mensaje = '🙋🏼‍♂️ Cliente a bordo';
+                }
+                chatDespacho.enviarChat(req, imei, idDespacho, idClienteRecibe, idClienteEnvia, _CHAT_ENVIA_CAJERO, _CHAT_TIPO_LINE, mensaje, mensaje, valor, idDespachoEstado, function () {
+                    return res.status(200).send({ estado: 1, despacho: despacho });
                 }, res);
             }, res);
         }, res);
@@ -392,12 +396,17 @@ function entregarProducto(req, res, idplataforma, imei) {
     validar.token(idCliente, auth, idplataforma, imei, res, function (autorizado, cliente) {
         if (!autorizado)
             return;
-        let mensaje = '🥳 Compra entregada';
-        _despacho.finalizar(req, res, imei, idCliente, tipo, idDespacho, idClienteRecibe, idClienteEnvia, mensaje, function () {
-            data.consultarRes(STORE_LISTAR_ID_DESPACHO_CLIENTE, [idDespacho], function (despachos) {
-                idClienteEnvia = despachos[0]['id_cajero']; //Cambiamos el id del cliente que envia pues esta accion debe ser de el
-                _cajero.confirmarPago(req, imei, despachos[0]['id_compra'], idClienteEnvia, idClienteRecibe, function () {
-                    return res.status(200).send({ estado: 1, despacho: despachos[0] });
+        data.consultarRes(STORE_LISTAR_ID_DESPACHO_CLIENTE, [idDespacho], function (despachos) {
+            let despacho = despachos[0];
+            let mensaje = '🥳 Compra entregada';
+            let valor = '';
+            if (despacho['tipo'] == _TIPO_ENCOMIENDA) {
+                mensaje = '🙋🏼‍♂️ Cliente finalizo';
+            }
+            _despacho.finalizar(req, res, imei, idCliente, tipo, idDespacho, idClienteRecibe, idClienteEnvia, mensaje, function () {
+                idClienteEnvia = despacho['id_cajero']; //Cambiamos el id del cliente que envia pues esta accion debe ser de el
+                _cajero.confirmarPago(req, imei, despacho['id_compra'], idClienteEnvia, idClienteRecibe, function () {
+                    return res.status(200).send({ estado: 1, despacho: despacho });
                 }, res);
             }, res);
         });
